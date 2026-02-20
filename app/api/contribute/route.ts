@@ -11,8 +11,9 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: 'Missing required fields' }, { status: 400 })
   }
 
-  // Validate workshop exists
-  if (!getWorkshop(workshopSlug)) {
+  // Validate workshop exists (hardcoded or community)
+  const isCommunity = workshopSlug.startsWith('community-')
+  if (!isCommunity && !getWorkshop(workshopSlug)) {
     return NextResponse.json({ error: 'Invalid workshop' }, { status: 400 })
   }
 

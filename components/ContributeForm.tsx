@@ -13,7 +13,6 @@ export default function ContributeForm({ workshopSlug, workshopName }: Contribut
   const [form, setForm] = useState({
     name: '',
     email: '',
-    team: '',
     templateUrl: '',
     templateDescription: '',
     notes: '',
@@ -37,7 +36,7 @@ export default function ContributeForm({ workshopSlug, workshopName }: Contribut
 
       if (!res.ok) throw new Error('Submit failed')
       setStatus('success')
-      setForm({ name: '', email: '', team: '', templateUrl: '', templateDescription: '', notes: '' })
+      setForm({ name: '', email: '', templateUrl: '', templateDescription: '', notes: '' })
     } catch {
       setStatus('error')
     }
@@ -131,28 +130,16 @@ export default function ContributeForm({ workshopSlug, workshopName }: Contribut
         </div>
 
         {/* Name */}
-        <div className="grid grid-cols-2 gap-3">
-          <div>
-            <label className="block text-sm font-medium text-ink-700 mb-1.5">Your name *</label>
-            <input
-              required
-              type="text"
-              value={form.name}
-              onChange={(e) => setForm({ ...form, name: e.target.value })}
-              className="w-full px-3 py-2.5 rounded border border-ink-200 text-sm text-ink-900 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent"
-              placeholder="Jane Smith"
-            />
-          </div>
-          <div>
-            <label className="block text-sm font-medium text-ink-700 mb-1.5">Team / department</label>
-            <input
-              type="text"
-              value={form.team}
-              onChange={(e) => setForm({ ...form, team: e.target.value })}
-              className="w-full px-3 py-2.5 rounded border border-ink-200 text-sm text-ink-900 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent"
-              placeholder="e.g. Digital, Policy"
-            />
-          </div>
+        <div>
+          <label className="block text-sm font-medium text-ink-700 mb-1.5">Your name *</label>
+          <input
+            required
+            type="text"
+            value={form.name}
+            onChange={(e) => setForm({ ...form, name: e.target.value })}
+            className="w-full px-3 py-2.5 rounded border border-ink-200 text-sm text-ink-900 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent"
+            placeholder="Jane Smith"
+          />
         </div>
 
         {/* Email */}
