@@ -26,7 +26,11 @@ export async function DELETE(
       return NextResponse.json({ error: 'Workshop not found' }, { status: 404 })
     }
 
-    if (data.suggester_email.toLowerCase() !== email.trim().toLowerCase()) {
+    const stored = data.suggester_email.trim().toLowerCase()
+    const provided = email.trim().toLowerCase()
+    console.log('stored:', JSON.stringify(stored), 'provided:', JSON.stringify(provided))
+
+    if (stored !== provided) {
       return NextResponse.json({ error: 'Email does not match' }, { status: 403 })
     }
 
