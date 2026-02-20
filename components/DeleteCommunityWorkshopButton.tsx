@@ -20,7 +20,7 @@ export default function DeleteCommunityWorkshopButton({ id }: { id: string }) {
         body: JSON.stringify({ email }),
       })
       if (res.status === 403) {
-        setError('Email doesn't match the one used to submit this workshop.')
+        setError("Email doesn't match the one used to submit this workshop.")
         setDeleting(false)
         return
       }
