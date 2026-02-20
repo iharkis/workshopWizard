@@ -6,6 +6,7 @@ import ContributeForm from '@/components/ContributeForm'
 import CommunityContributions from '@/components/CommunityContributions'
 import { createClient } from '@/lib/supabase-server'
 import { parseCommunityWorkshop, CommunityWorkshopRow } from '@/lib/parse-community-workshop'
+import DeleteCommunityWorkshopButton from '@/components/DeleteCommunityWorkshopButton'
 
 export async function generateStaticParams() {
   return workshops.map((w) => ({ slug: w.slug }))
@@ -59,6 +60,7 @@ async function getCommunityWorkshop(slug: string): Promise<Workshop | null> {
       .from('workshop_suggestions')
       .select('id, suggester_name, workshop_name, description, category, duration, group_size, when_to_use, steps, materials, tips, tags, created_at')
       .eq('id', id)
+      .eq('hidden', false)
       .single()
     if (error || !data) return null
     return parseCommunityWorkshop(data as CommunityWorkshopRow)
@@ -80,15 +82,20 @@ export default async function WorkshopPage({ params }: { params: Promise<{ slug:
 
       {/* Nav */}
       <nav className="bg-white border-b border-ink-100">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center gap-2">
-          <Link href="/" className="flex items-center gap-1.5 text-sm text-ink-400 hover:text-ink-900 transition-colors">
-            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
-            </svg>
-            All workshops
-          </Link>
-          <span className="text-ink-200">/</span>
-          <span className="text-sm text-ink-500 truncate">{workshop.name}</span>
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between gap-2">
+          <div className="flex items-center gap-2 min-w-0">
+            <Link href="/" className="flex items-center gap-1.5 text-sm text-ink-400 hover:text-ink-900 transition-colors shrink-0">
+              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
+              </svg>
+              All workshops
+            </Link>
+            <span className="text-ink-200">/</span>
+            <span className="text-sm text-ink-500 truncate">{workshop.name}</span>
+          </div>
+          {workshop.isCommunity && (
+            <DeleteCommunityWorkshopButton id={slug.replace('community-', '')} />
+          )}
         </div>
       </nav>
 

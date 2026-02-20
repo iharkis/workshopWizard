@@ -11,6 +11,7 @@ async function getCommunityWorkshops(): Promise<Workshop[]> {
     const { data, error } = await supabase
       .from('workshop_suggestions')
       .select('id, suggester_name, workshop_name, description, category, duration, group_size, when_to_use, steps, materials, tips, tags, created_at')
+      .eq('hidden', false)
       .order('created_at', { ascending: false })
     if (error || !data) return []
     return (data as CommunityWorkshopRow[]).map(parseCommunityWorkshop)
