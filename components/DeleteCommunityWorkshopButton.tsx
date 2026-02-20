@@ -5,7 +5,6 @@ import { useRouter } from 'next/navigation'
 
 export default function DeleteCommunityWorkshopButton({ id }: { id: string }) {
   const [confirming, setConfirming] = useState(false)
-  const [email, setEmail] = useState('')
   const [deleting, setDeleting] = useState(false)
   const [error, setError] = useState('')
   const router = useRouter()
@@ -14,14 +13,7 @@ export default function DeleteCommunityWorkshopButton({ id }: { id: string }) {
     setDeleting(true)
     setError('')
     try {
-      const res = await fetch(`/api/community/${id}?email=${encodeURIComponent(email)}`, {
-        method: 'DELETE',
-      })
-      if (res.status === 403) {
-        setError("Email doesn't match the one used to submit this workshop.")
-        setDeleting(false)
-        return
-      }
+      const res = await fetch(`/api/community/${id}`, { method: 'DELETE' })
       if (!res.ok) throw new Error()
       router.push('/')
     } catch {
@@ -32,29 +24,22 @@ export default function DeleteCommunityWorkshopButton({ id }: { id: string }) {
 
   if (confirming) {
     return (
-      <div className="flex items-center gap-2 flex-wrap">
-        <input
-          type="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          placeholder="Enter your email to confirm"
-          className="px-2.5 py-1.5 text-sm border border-ink-200 rounded focus:outline-none focus:ring-2 focus:ring-red-400 focus:border-transparent w-56"
-          autoFocus
-        />
+      <div className="flex items-center gap-3 flex-wrap">
+        <span className="text-sm text-ink-500">Remove this workshop?</span>
         <button
           onClick={handleDelete}
-          disabled={deleting || !email}
+          disabled={deleting}
           className="text-sm font-medium text-red-600 hover:text-red-700 disabled:opacity-40"
         >
-          {deleting ? 'Removing…' : 'Confirm'}
+          {deleting ? 'Removing…' : 'Yes, delete'}
         </button>
         <button
-          onClick={() => { setConfirming(false); setEmail(''); setError('') }}
+          onClick={() => setConfirming(false)}
           className="text-sm text-ink-400 hover:text-ink-600"
         >
           Cancel
         </button>
-        {error && <span className="text-xs text-red-600 w-full">{error}</span>}
+        {error && <span className="text-xs text-red-600">{error}</span>}
       </div>
     )
   }
