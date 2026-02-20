@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic'
+
 import { createClient } from '@/lib/supabase-server'
 import { workshops, Workshop } from '@/data/workshops'
 import { parseCommunityWorkshop, CommunityWorkshopRow } from '@/lib/parse-community-workshop'

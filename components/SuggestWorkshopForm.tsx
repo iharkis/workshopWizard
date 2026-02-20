@@ -50,8 +50,8 @@ export default function SuggestWorkshopForm({ onClose }: { onClose: () => void }
               <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
             </svg>
           </div>
-          <h3 className="text-lg font-semibold text-ink-900 mb-2">Thanks for the suggestion!</h3>
-          <p className="text-sm text-ink-500">We&apos;ll review it and consider adding it to the directory.</p>
+          <h3 className="text-lg font-semibold text-ink-900 mb-2">Workshop added!</h3>
+          <p className="text-sm text-ink-500">It&apos;s now live in the directory. Refresh the home page to see it.</p>
           <button
             onClick={onClose}
             className="mt-6 btn-hippo text-sm"
