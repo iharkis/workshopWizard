@@ -6,7 +6,7 @@ export async function DELETE(
   { params }: { params: Promise<{ id: string }> }
 ) {
   const { id } = await params
-  const email = req.nextUrl.searchParams.get('email')
+  const email = new URL(req.url).searchParams.get('email')
 
   if (!email) {
     return NextResponse.json({ error: 'Email required' }, { status: 400 })
