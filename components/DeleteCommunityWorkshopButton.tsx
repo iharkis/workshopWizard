@@ -14,10 +14,8 @@ export default function DeleteCommunityWorkshopButton({ id }: { id: string }) {
     setDeleting(true)
     setError('')
     try {
-      const res = await fetch(`/api/community/${id}`, {
+      const res = await fetch(`/api/community/${id}?email=${encodeURIComponent(email)}`, {
         method: 'DELETE',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email }),
       })
       if (res.status === 403) {
         setError("Email doesn't match the one used to submit this workshop.")
