@@ -1,0 +1,71 @@
+@import "tailwindcss";
+
+@theme {
+  /* Brand → hippo green */
+  --color-brand-500: #005e5d;
+  --color-brand-600: #004c4b;
+  --color-brand-50:  #e4f2f2;
+  --color-brand-100: #b8dbdb;
+
+  /* Ink → hippo dark tones */
+  --color-ink-900: #0c2340;
+  --color-ink-700: #322947;
+  --color-ink-500: #56687a;
+  --color-ink-400: #7e94a4;
+  --color-ink-300: #a8b8c4;
+  --color-ink-200: #cdd8e0;
+  --color-ink-100: #dde6ec;
+  --color-ink-50:  #e5ebf0;
+
+  --font-sans: var(--font-dm-sans);
+}
+
+body {
+  font-family: 'DM Sans', system-ui, sans-serif;
+  background-color: #e5ebf0;
+  color: #322947;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Shared button style matching hippo design system */
+.btn-hippo {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 10px 22px;
+  background: #005e5d;
+  color: #fff;
+  border: 1px solid #005e5d;
+  border-radius: 28px;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.btn-hippo:hover {
+  background: #004c4b;
+  border-color: #004c4b;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 14px rgba(0, 94, 93, 0.35);
+}
+.btn-hippo:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* Card hover lift */
+.card-hippo {
+  background: #fff;
+  border-radius: 10px;
+  transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07);
+}
+.card-hippo:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.13);
+}
