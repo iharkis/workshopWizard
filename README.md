@@ -59,6 +59,7 @@ CREATE TABLE workshop_suggestions (
   materials TEXT,
   tips TEXT,
   tags TEXT,
+  hidden BOOLEAN DEFAULT false,
   created_at TIMESTAMPTZ DEFAULT NOW()
 );
 ```
