@@ -200,7 +200,18 @@ export default async function WorkshopPage({ params }: { params: Promise<{ slug:
                         <h3 className="font-semibold text-ink-900 text-sm">{step.title}</h3>
                         <span className="text-xs text-ink-400 bg-ink-50 border border-ink-200 px-2 py-0.5 rounded-full">{step.duration}</span>
                       </div>
-                      <p className="text-sm text-ink-500 leading-relaxed">{step.description}</p>
+                      <p className="text-sm text-ink-600 leading-relaxed">{step.description}</p>
+                      {step.facilitatorNotes && (
+                        <details className="mt-2 group">
+                          <summary className="list-none flex items-center gap-1 cursor-pointer select-none w-fit">
+                            <svg className="w-3 h-3 text-brand-400 transition-transform group-open:rotate-90 shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                              <path fillRule="evenodd" d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z" clipRule="evenodd" />
+                            </svg>
+                            <span className="text-xs font-medium text-brand-500 group-open:text-brand-700">Facilitator notes</span>
+                          </summary>
+                          <p className="mt-2 text-sm text-ink-500 leading-relaxed border-l-2 border-ink-200 pl-3">{step.facilitatorNotes}</p>
+                        </details>
+                      )}
                     </div>
                   </div>
                 ))}
